@@ -1,0 +1,3 @@
+{:deps  {umlaut {:mvn/version "0.6.2"
+                 :exclusions [org.clojure/clojure]}}
+ :paths ["src"]}

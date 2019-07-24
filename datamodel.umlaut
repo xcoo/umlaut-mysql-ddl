@@ -1,0 +1,65 @@
+enum Lisp {
+  COMMON_LISP
+  CLOJURE
+  SCHEME
+}
+
+@lang/ddl _ _
+type Company {
+  id: Integer {
+     @lang/ddl type BIGINT
+     @lang/ddl primary_key _
+  }
+  jobs: Job[0..n]?
+  name: String {
+     @lang/ddl type varchar.50
+     @lang/ddl unique _
+  }
+  philosophy: String {
+     @lang/ddl supress _
+  }
+  address: String {
+     @lang/ddl type varchar.50
+     @lang/ddl unique _
+  }
+}
+
+@lang/ddl _ _
+type Job {
+  lisperId: Integer {
+    @lang/ddl type BIGINT
+    @lang/ddl primary_key _
+    @lang/ddl fk Lisper.id
+  }
+  companyId: Integer {
+    @lang/ddl type BIGINT
+    @lang/ddl primary_key _
+    @lang/ddl fk company.id
+  }
+  salary: Integer {
+    @lang/ddl type BIGINT
+  }
+  description: String {
+    @lang/ddl type varchar.255
+  }
+}
+
+@lang/ddl _ _
+type Lisper {
+  lisp: Lisp
+  id: Integer {
+    @doc "Uniquely identifies a lisper"
+    @lang/ddl type BIGINT
+    @lang/ddl primary_key _
+    @lang/ddl AUTO_INCREMENT true
+  }
+  jobs: Job[0..n]?
+  fullName: String {
+    @lang/ddl unique _
+    @lang/ddl type varchar.50
+  }
+  employed: Boolean {
+    @lang/ddl type boolean
+    @lang/ddl default_value true
+  }
+}
