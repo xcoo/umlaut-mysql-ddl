@@ -16,7 +16,7 @@ type Company {
      @lang/ddl unique _
   }
   philosophy: String {
-     @lang/ddl supress _
+     @lang/ddl suppress _
   }
   address: String {
      @lang/ddl type varchar.50
