@@ -28,7 +28,7 @@ A type level annotation with `lang/ddl` namespace will cause ddl to be emitted f
 - `@lang/ddl type <THE TYPE>.<PARAMETER>` - Overrites the column's datatype with specified value with a parameter. e.g. `@lang/ddl type varchar.50`
 - `@lang/ddl fk <OTHER TYPE>.<FIELD>` - Adds a foreign key constraint
 - `@lang/ddl AUTO_INCREMENT true` - Indicates that column should be auto incremented
-- `@lang/ddl supress _` - Indicates that a column should not be emitted for this field. Useful when e.g. you want to expose a field that is not sourced as a column of a table.
+- `@lang/ddl suppress _` - Indicates that a column should not be emitted for this field. Useful when e.g. you want to expose a field that is not sourced as a column of a table.
 - `@doc "<the comment>"` - renders a comment for the corresponding column
 
 ## Mapping with umlaut built in dsl

@@ -38,7 +38,7 @@
 
 (defn map-column-type [field-def umlaut]
   (when-not (seq (some->> (get-in field-def [:field-annotations :others])
-                          (annotations-by-space-key "supress")))
+                          (annotations-by-space-key "suppress")))
     (or (let [type-annot-val (some->> (get-in field-def [:field-annotations :others])
                                       (annotations-by-space-key "type")
                                       first
