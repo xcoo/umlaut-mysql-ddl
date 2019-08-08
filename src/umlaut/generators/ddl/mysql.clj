@@ -87,6 +87,26 @@
                 (str/join ","))
            ")"))))
 
+(defn render-index-key-stmt [field-defs]
+  (let [index-annots (->> field-defs
+                          (map (juxt (comp ->snake_case :id)
+                                     (comp seq
+                                           (partial annotations-by-space-key "index")
+                                           :others
+                                           :field-annotations)))
+                          (filter (comp seq second)))]
+    (when (seq index-annots)
+      (str "   ";;For nice indentation
+           "INDEX index_"
+           (->> index-annots
+                (map first)
+                (str/join "_"))
+           "("
+           (->> index-annots
+                (map first)
+                (str/join ","))
+           ")"))))
+
 (defn render-foreign-key-stmt [def field-defs]
   (let [fk-annots (->> field-defs
                        (map (juxt (comp ->snake_case :id)
@@ -155,6 +175,7 @@
 (defn umlaut-def->create-table+drop-table [def umlaut]
   (let [pk-stmt (render-primary-key-stmt (:fields def))
         unique-stmt (render-unique-key-stmt (:fields def))
+        index-stmt (render-index-key-stmt (:fields def))
         fk-stmt (render-foreign-key-stmt def (:fields def))
         col-stmts (column-statements umlaut (:fields def))]
     {:drop (str "DROP TABLE " (->snake_case (:id def)))
@@ -165,7 +186,8 @@
                 (str/join ",\n"
                           (->> (into (conj (vec col-stmts)
                                            pk-stmt
-                                           unique-stmt)
+                                           unique-stmt
+                                           index-stmt)
                                      fk-stmt)
                                (remove nil?)))
                 ")"

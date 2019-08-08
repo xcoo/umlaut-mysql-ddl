@@ -24,6 +24,7 @@ A type level annotation with `lang/ddl` namespace will cause ddl to be emitted f
 
 - `@lang/ddl primary_key _` - Indicates the corresponding column is a primary key. If multiple fields have this annotation, a composite primary key will be emitted.
 - `@lang/ddl unique _` - Indicates the corresponding column has a unique constraint. If multiple fields have this annotation, a composite unique constraint will be emitted.
+- `@lang/ddl index _` - Indicates the corresponding column has an non-unique index.
 - `@lang/ddl type <THE TYPE>` - Overrites the column's datatype with specified value.
 - `@lang/ddl type <THE TYPE>.<PARAMETER>` - Overrites the column's datatype with specified value with a parameter. e.g. `@lang/ddl type varchar.50`
 - `@lang/ddl fk <OTHER TYPE>.<FIELD>` - Adds a foreign key constraint

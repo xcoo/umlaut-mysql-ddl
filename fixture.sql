@@ -4,7 +4,8 @@ CREATE TABLE lisper (
    full_name varchar(50) NOT NULL    ,
    employed boolean NOT NULL  DEFAULT true   ,
    PRIMARY KEY(id),
-   UNIQUE INDEX unique_full_name(full_name))
+   UNIQUE INDEX unique_full_name(full_name),
+   INDEX index_employed(employed))
 ENGINE = InnoDB
 
 CREATE TABLE company (

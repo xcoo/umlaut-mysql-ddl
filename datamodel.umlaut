@@ -59,6 +59,7 @@ type Lisper {
     @lang/ddl type varchar.50
   }
   employed: Boolean {
+    @lang/ddl index _
     @lang/ddl type boolean
     @lang/ddl default_value true
   }
